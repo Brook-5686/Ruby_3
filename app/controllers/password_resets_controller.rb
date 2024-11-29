@@ -1,11 +1,12 @@
 # frozen_string_literal: true
+require 'json'
 class PasswordResetsController < ApplicationController
   skip_before_action :authenticated
 
   def reset_password
-    user = Marshal.load(Base64.decode64(params[:user])) unless params[:user].nil?
+    user = JSON.parse(Base64.decode64(params[:user])) unless params[:user].nil?
 
-    if user && params[:password] && params[:confirm_password] && params[:password] == params[:confirm_password]
+    if user && user.is_a?(Hash) && params[:password] && params[:confirm_password] && params[:password] == params[:confirm_password]
       user.password = params[:password]
       user.save!
       flash[:success] = "Your password has been reset please login"
