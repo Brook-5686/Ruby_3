@@ -8,8 +8,14 @@ class BenefitFormsController < ApplicationController
   def download
    begin
      path = params[:name]
-     file = params[:type].constantize.new(path)
-     send_file file, disposition: "attachment"
+     allowed_types = ["AllowedType1", "AllowedType2"] # Replace with actual allowed types
+     if allowed_types.include?(params[:type])
+       file = params[:type].constantize.new(path)
+       send_file file, disposition: "attachment"
+     else
+       flash[:error] = "Invalid file type"
+       redirect_to user_benefit_forms_path(user_id: current_user.id) and return
+     end
    rescue
      redirect_to user_benefit_forms_path(user_id: current_user.id)
    end
