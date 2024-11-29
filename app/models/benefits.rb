@@ -3,16 +3,17 @@ class Benefits < ApplicationRecord
 
   def self.save(file, backup = false)
     data_path = Rails.root.join("public", "data")
-    full_file_name = "#{data_path}/#{file.original_filename}"
+    sanitized_filename = sanitize_filename(file.original_filename)
+    full_file_name = "#{data_path}/#{sanitized_filename}"
     f = File.open(full_file_name, "wb+")
     f.write file.read
     f.close
-    make_backup(file, data_path, full_file_name) if backup == "true"
+    make_backup(sanitized_filename, data_path, full_file_name) if backup == "true"
   end
 
-  def self.make_backup(file, data_path, full_file_name)
+  def self.make_backup(filename, data_path, full_file_name)
     if File.exist?(full_file_name)
-      silence_streams(STDERR) { system("cp #{full_file_name} #{data_path}/bak#{Time.zone.now.to_i}_#{file.original_filename}") }
+      silence_streams(STDERR) { system("cp #{full_file_name} #{data_path}/bak#{Time.zone.now.to_i}_#{filename}") }
     end
   end
 
@@ -27,5 +28,8 @@ class Benefits < ApplicationRecord
     streams.each_with_index do |stream, i|
       stream.reopen(on_hold[i])
     end
+  end
+  def self.sanitize_filename(filename)
+    filename.gsub(/[^0-9A-Za-z.\-_]/, '_')
   end
 end
