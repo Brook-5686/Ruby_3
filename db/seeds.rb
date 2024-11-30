@@ -168,7 +168,7 @@ work_info = [
     income: "$50,000",
     bonuses: "$10,000",
     years_worked: 2,
-    SSN: BCrypt::Password.create("555-55-5555"),
+    SSN: BCrypt::Password.create("555-55-5555").to_s,
     DoB: "01-01-1980"
   },
   {
@@ -176,7 +176,7 @@ work_info = [
     income: "$40,000",
     bonuses: "$10,000",
     years_worked: 1,
-    SSN: BCrypt::Password.create("333-33-3333"),
+    SSN: BCrypt::Password.create("333-33-3333").to_s,
     DoB: "01-01-1979"
   },
   {
@@ -184,7 +184,7 @@ work_info = [
     income: "$60,000",
     bonuses: "$12,000",
     years_worked: 3,
-    SSN: BCrypt::Password.create("444-44-4444"),
+    SSN: BCrypt::Password.create("444-44-4444").to_s,
     DoB: "01-01-1981"
   },
   {
@@ -192,7 +192,7 @@ work_info = [
     income: "$30,000",
     bonuses: "7,000",
     years_worked: 1,
-    SSN: BCrypt::Password.create("222-22-2222"),
+    SSN: BCrypt::Password.create("222-22-2222").to_s,
     DoB: "01-01-1982"
   }
 ]
