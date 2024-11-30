@@ -1337,7 +1337,7 @@
       selector = selector && selector.replace(/.*(?=#[^\s]*$)/, '') //strip for ie7
     }
 
-    $parent = $(selector)
+    $parent = $this.closest('.alert').find(selector)
 
     e && e.preventDefault()
 
