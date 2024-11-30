@@ -13,9 +13,11 @@ class DashboardController < ApplicationController
   end
 
   def change_graph
-    allowed_graphs = ["bar_graph", "pie_charts"]
-    if allowed_graphs.include?(params[:graph])
-      self.try(params[:graph])
+    case params[:graph]
+    when "bar_graph"
+      bar_graph
+    when "pie_charts"
+      pie_charts
     else
       # Handle invalid graph type
       render plain: "Invalid graph type", status: :bad_request
@@ -28,5 +30,16 @@ class DashboardController < ApplicationController
       @user = current_user
       render "dashboard/pie_charts"
     end
+  end
+
+  private
+
+  def bar_graph
+    render "dashboard/bar_graph"
+  end
+
+  def pie_charts
+    @user = current_user
+    render "dashboard/pie_charts"
   end
 end
