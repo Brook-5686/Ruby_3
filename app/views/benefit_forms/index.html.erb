@@ -1,3 +1,4 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
 <div class="dashboard-wrapper">
   <div class="main-container">
 
@@ -114,7 +115,7 @@
   $(function() {
     $("#benefits_upload").change(function (){
       var fileName = $(this).val();
-      $(".filename").html(fileName);
+      $(".filename").html(_.escape(fileName));
     });
   });
 
