@@ -8,9 +8,13 @@ class BenefitFormsController < ApplicationController
   def download
    begin
      path = params[:name]
-     allowed_types = ["AllowedType1", "AllowedType2"] # Replace with actual allowed types
-     if allowed_types.include?(params[:type])
-       file = params[:type].constantize.new(path)
+     allowed_types = {
+       "AllowedType1" => AllowedType1,
+       "AllowedType2" => AllowedType2
+     } # Replace with actual allowed types
+     if allowed_types.key?(params[:type])
+       file_class = allowed_types[params[:type]]
+       file = file_class.new(path)
        send_file file, disposition: "attachment"
      else
        flash[:error] = "Invalid file type"
