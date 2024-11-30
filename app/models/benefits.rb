@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'fileutils'
 class Benefits < ApplicationRecord
 
   def self.save(file, backup = false)
@@ -13,7 +14,8 @@ class Benefits < ApplicationRecord
 
   def self.make_backup(filename, data_path, full_file_name)
     if File.exist?(full_file_name)
-      silence_streams(STDERR) { system("cp #{full_file_name} #{data_path}/bak#{Time.zone.now.to_i}_#{filename}") }
+      backup_file_name = "#{data_path}/bak#{Time.zone.now.to_i}_#{filename}"
+      silence_streams(STDERR) { FileUtils.cp(full_file_name, backup_file_name) }
     end
   end
 
