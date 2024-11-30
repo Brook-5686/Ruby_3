@@ -72,26 +72,26 @@ users = [
 retirements = [
   {
     user: "jack@metacorp.com",
-    employee_contrib: "1000",
-    employer_contrib: "2000",
+    employee_contrib: BCrypt::Password.create("1000"),
+    employer_contrib: BCrypt::Password.create("2000"),
     total: "4500"
   },
   {
     user: "jim@metacorp.com",
-    employee_contrib: "8000",
-    employer_contrib: "16000",
+    employee_contrib: BCrypt::Password.create("8000"),
+    employer_contrib: BCrypt::Password.create("16000"),
     total: "30000"
   },
   {
     user: "mike@metacorp.com",
-    employee_contrib: "10000",
-    employer_contrib: "20000",
+    employee_contrib: BCrypt::Password.create("10000"),
+    employer_contrib: BCrypt::Password.create("20000"),
     total: "40000"
   },
   {
     user: "ken@metacorp.com",
-    employee_contrib: "3000",
-    employer_contrib: "6000",
+    employee_contrib: BCrypt::Password.create("3000"),
+    employer_contrib: BCrypt::Password.create("6000"),
     total: "12500"
   }
 ]
