@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'bcrypt'
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed (or created alongside the db with db:setup).
 #
@@ -7,8 +8,8 @@ users = [
   {
     email: "admin@metacorp.com",
     admin: true,
-    password: "admin1234",
-    password_confirmation: "admin1234",
+    password: BCrypt::Password.create("admin1234"),
+    password_confirmation: BCrypt::Password.create("admin1234"),
     first_name: "Admin",
     last_name: "",
   },
@@ -16,8 +17,8 @@ users = [
   {
     email: "jmmastey@metacorp.com",
     admin: false,
-    password: "railsgoat!",
-    password_confirmation: "railsgoat!",
+    password: BCrypt::Password.create("railsgoat!"),
+    password_confirmation: BCrypt::Password.create("railsgoat!"),
     first_name: "Joseph",
     last_name: "Mastey",
   },
@@ -25,8 +26,8 @@ users = [
   {
     email: "jack@metacorp.com",
     admin: false,
-    password: "yankeessuck",
-    password_confirmation: "yankeessuck",
+    password: BCrypt::Password.create("yankeessuck"),
+    password_confirmation: BCrypt::Password.create("yankeessuck"),
     first_name: "Jack",
     last_name: "Mannino",
   },
