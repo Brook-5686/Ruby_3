@@ -5,11 +5,15 @@ class Api::V1::MobileController < ApplicationController
 
   respond_to :json
 
-  ALLOWED_CLASSES = ['User', 'Product', 'Order'].freeze
+  ALLOWED_CLASSES = {
+    'User' => User,
+   'Product' => Product,
+   'Order' => Order
+ }.freeze
 
   def show
     if params[:class] && ALLOWED_CLASSES.include?(params[:class].classify)
-      model = params[:class].classify.constantize
+      model = ALLOWED_CLASSES[params[:class].classify]
       respond_with model.find(params[:id]).to_json
     else
       render json: { error: 'Invalid class parameter' }, status: :bad_request
@@ -18,7 +22,7 @@ class Api::V1::MobileController < ApplicationController
 
   def index
     if params[:class] && ALLOWED_CLASSES.include?(params[:class].classify)
-      model = params[:class].classify.constantize
+      model = ALLOWED_CLASSES[params[:class].classify]
       respond_with model.all.to_json
     else
       respond_with nil.to_json
