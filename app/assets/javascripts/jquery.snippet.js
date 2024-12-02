@@ -193,8 +193,26 @@
 					// collapse functionality
 					if(defaults.collapse){
 						var styleClass = o.parent().attr('class');
-						var collapseShow = "<div class='snippet-reveal "+styleClass+"'><pre class='sh_sourceCode'><a href='#' class='snippet-toggle'>"+defaults.showMsg+"</a></pre></div>";
-						var collapseHide = "<div class='sh_sourceCode snippet-hide'><pre><a href='#' class='snippet-revealed snippet-toggle'>"+defaults.hideMsg+"</a></pre></div>";
+						var collapseShow = document.createElement('div');
+						collapseShow.className = 'snippet-reveal ' + styleClass;
+						var preShow = document.createElement('pre');
+						preShow.className = 'sh_sourceCode';
+						var aShow = document.createElement('a');
+						aShow.href = '#';
+						aShow.className = 'snippet-toggle';
+						aShow.textContent = defaults.showMsg;
+						preShow.appendChild(aShow);
+						collapseShow.appendChild(preShow);
+						
+						var collapseHide = document.createElement('div');
+						collapseHide.className = 'sh_sourceCode snippet-hide';
+						var preHide = document.createElement('pre');
+						var aHide = document.createElement('a');
+						aHide.href = '#';
+						aHide.className = 'snippet-revealed snippet-toggle';
+						aHide.textContent = defaults.hideMsg;
+						preHide.appendChild(aHide);
+						collapseHide.appendChild(preHide);
 						
 						o.parents('.snippet-container').append(collapseShow);
 						o.parent().append(collapseHide);
