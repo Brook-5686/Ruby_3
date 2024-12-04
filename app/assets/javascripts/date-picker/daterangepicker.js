@@ -85,6 +85,15 @@
             }
         }
 
+        function sanitizeInput(input) {
+            var element = document.createElement('div');
+            element.innerText = input;
+            return element.innerHTML;
+        }
+
+        this.applyClass = sanitizeInput(this.applyClass);
+        this.clearClass = sanitizeInput(this.clearClass);
+
         var DRPTemplate = '<div class="daterangepicker dropdown-menu">' +
                 '<div class="calendar left"></div>' +
                 '<div class="calendar right"></div>' +
