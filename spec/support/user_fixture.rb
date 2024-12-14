@@ -7,8 +7,9 @@ class UserFixture
 
   def self.normal_user
     password = BCrypt::Password.create(ENV['NORMAL_USER_PASSWORD'])
+    password_confirmation = BCrypt::Password.create(ENV['NORMAL_USER_PASSWORD'])
     User.create!(first_name: "Joe", last_name: "Schmoe", email: "joe@schmoe.com",
-                 password: password, password_confirmation: password).tap do |user|
+                 password: password, password_confirmation: password_confirmation).tap do |user|
       def user.clear_password
         "[redacted]"
       end
